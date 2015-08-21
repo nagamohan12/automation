@@ -2,7 +2,19 @@ require 'rubygems'
 require 'selenium-cucumber'
 require 'pry'
 require 'login'
-# require 'page_object'
+require 'rubyXL'
+require 'page-object'
+require 'spreadsheet'
+require 'importex'
+require 'user'
+require 'rails'
+require 'rubysl-win32ole'
+# require 'win32ole'
+require 'excel_to_csv'
+require 'csv_to_yml'
+require 'record'
+require 'odbc'
+require 'xls_with_odbc'
 
 # Store command line arguments
 $browser_type = ENV['BROWSER'] || 'ff'
@@ -45,8 +57,14 @@ $app_path = ENV['APP_PATH']
 #   end
 # else # else create driver instance for desktop browser
   begin
+    # XlsWithOdbc.convertion_data
+    ExcelToCsv.convert_all_xls_to_csv
     $driver = Selenium::WebDriver.for(:"#{$browser_type}")
     $driver.manage().window().maximize()
+    # Spreadsheet.client_encoding = 'UTF-8'
+    User.import('/home/administrator/RubymineProjects/test_automation/logins.xls')
+    # screenshot = Screenshot.new($driver)
+    # binding.pry
   rescue Exception => e
     puts e.message
     Process.exit(0)

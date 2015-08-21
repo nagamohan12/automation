@@ -1,0 +1,10 @@
+---
+- email: mailto:nousautomation@gmail
+  password: mailto:nous@123
+  status: Y
+- email: 
+  password: mailto:nous@123
+  status: Y
+- email: mailto:nousautomation@gmail
+  password: 
+  status: N
