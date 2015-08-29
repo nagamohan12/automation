@@ -1,4 +1,4 @@
-"email","password","status"
-"mailto:nousautomation@gmail","mailto:nous@123","Y"
-,"mailto:nous@123","Y"
-"mailto:nousautomation@gmail",,"N"
+"email","password","status","scenario"
+"nousautomation @ gmail.com","nous @ 123","Y","Login Functionality with Success"
+,"Nous @ 123","Y","Login Functionality with Faiure"
+"nousautomation @ gmail.com",,"N",

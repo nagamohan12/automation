@@ -7,7 +7,7 @@ class Record
   end
 
   def self.get_seed_path
-    present_directory_path + '/seed'
+    present_directory_path + '/seed/'
   end
 
   def self.file_name(file,format)
@@ -16,6 +16,10 @@ class Record
 
   def self.get_all_input_csv_files
     Dir.glob("#{present_directory_path}/input/*.csv")
+  end
+
+  def self.csv_file(file)
+    Dir.glob("#{file}")
   end
 
   def self.create_seed_directory
@@ -27,6 +31,12 @@ class Record
   end
 
   def self.get_file_data(file_name)
+    return nil if file_name.empty?
+    file = get_file_name_with_yaml(file_name)
+    YAML.load_documents(File.open(file)).flatten
+  end
+
+  def self.get_csv_file_data(file_name)
     return nil if file_name.empty?
     file = get_file_name_with_yaml(file_name)
     YAML.load_documents(File.open(file)).flatten

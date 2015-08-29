@@ -16,16 +16,17 @@ end
 #   submit('name', 'signIn')
 #   wait(10)
 # end
-@user = Record.get_file_data(test)
+
 When(/^user logs in using valid user name$/) do
-  # @user = User.all.first
-  enter_text('name', @user['email'], 'Email')
+  # binding.pry
+  @user = Record.get_file_data('test').first
+  enter_text('name', @user['email'].gsub(/\s+/, ""), 'Email')
   click('name', 'signIn')
 end
 
 And(/^Valid password$/) do
   wait(3)
-  enter_text('name', @user['password'], 'Passwd')
+  enter_text('name', @user['password'].gsub(/\s+/, ""), 'Passwd')
   submit('name', 'signIn')
   wait(10)
 end

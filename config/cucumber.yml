@@ -1,0 +1,7 @@
+# config/cucumber.yml
+##YAML Template
+---
+<% time = "features_report#{Time.now.strftime('%d%m%y%H%M%S')}.html" %>
+html_report: --format progress --format html --out=<%= time %>
+all: features/ --format progress --format html --out=<%= time %>
+#bvt: --tags @bvt

@@ -8,16 +8,23 @@ require 'spreadsheet'
 require 'importex'
 require 'user'
 require 'rails'
-require 'rubysl-win32ole'
+# require 'rubysl-win32ole'
 # require 'win32ole'
 require 'excel_to_csv'
 require 'csv_to_yml'
 require 'record'
-require 'odbc'
+# require 'odbc'
 require 'xls_with_odbc'
+require 'csv_act'
+require 'rake'
+require 'xls_act'
+require 'roo'
+require 'seed_data'
+# require "#{File.dirname(__FILE__)}/configuration"
 
 # Store command line arguments
-$browser_type = ENV['BROWSER'] || 'ff'
+SeedData.new()
+$browser_type = $browser || 'ff'
 $platform = ENV['PLATFORM'] || 'desktop'
 $os_version = ENV['OS_VERSION']
 $device_name = ENV['DEVICE_NAME']
@@ -57,14 +64,12 @@ $app_path = ENV['APP_PATH']
 #   end
 # else # else create driver instance for desktop browser
   begin
-    # XlsWithOdbc.convertion_data
-    ExcelToCsv.convert_all_xls_to_csv
+    # CsvAct.read_feature
+    # ExcelToCsv.convert_all_xls_to_csv
     $driver = Selenium::WebDriver.for(:"#{$browser_type}")
     $driver.manage().window().maximize()
     # Spreadsheet.client_encoding = 'UTF-8'
-    User.import('/home/administrator/RubymineProjects/test_automation/logins.xls')
-    # screenshot = Screenshot.new($driver)
-    # binding.pry
+    # User.import('/home/administrator/RubymineProjects/test_automation/logins.xls')
   rescue Exception => e
     puts e.message
     Process.exit(0)

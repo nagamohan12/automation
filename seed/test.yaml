@@ -1,10 +1,13 @@
 ---
-- email: mailto:nousautomation@gmail
-  password: mailto:nous@123
+- email: nousautomation @ gmail.com
+  password: nous @ 123
   status: Y
+  scenario: Login Functionality with Success
 - email: 
-  password: mailto:nous@123
+  password: Nous @ 123
   status: Y
-- email: mailto:nousautomation@gmail
+  scenario: Login Functionality with Faiure
+- email: nousautomation @ gmail.com
   password: 
   status: N
+  scenario: 

@@ -35,7 +35,7 @@ class XlsWithOdbc
 #     Dir['*.xls'].each{|xls|
 #       binding.pry
 #       print "Check #{xls}"
-#       @db = Sequel.ado(:conn_string=>"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=#{xls}")
+#       @db = Sequel.ado(:conn_string=>"Provider=Microsoft.Jet.OLEDB.4.0;SeedData Source=#{xls}")
 #       begin
 #         @db.test_connection
 #         puts " ok"
