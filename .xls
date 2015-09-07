@@ -1,0 +1,5 @@
+Feature,Scenario,Result,Remarks
+Login and Logout,Login With Valid Credentials and Logout,PASS,""
+Login and Logout,Login With invalid Credentials,PASS,""
+Member Registration,Register user,FAIL,"Unexpected modal dialog (text: You have not typed the image characters correctly
+): ""You have not typed the image characters correctly\n"""

@@ -1,0 +1,19 @@
+Feature,Scenario,Result,Remarks
+"","","",""
+BROWSER: ff,"","",""
+"","","",""
+User should be able to login with correct credentials and for wrong credentails user should get error message,"User tries to login With valid credentials and Logout, Examples (#1)",PASS,""
+User should be able to login with correct credentials and for wrong credentails user should get error message,"User tries to login With valid credentials and Logout, Examples (#2)",FAIL,'Are you sure you wish to logout?' is not present on the page
+User should be able to login with correct credentials and for wrong credentails user should get error message,"User tries to login With wrong credentials and Logout, Examples (#1)",PASS,""
+User should be able to login with correct credentials and for wrong credentails user should get error message,"User tries to login With wrong credentials and Logout, Examples (#2)",FAIL,'Wrong Credentials. Please try again!' is not present on the page
+Member Registration,"User tries to register on cyclos, Examples (#1)",FAIL,Registration is Successfull is not present on the page
+Member Registration,"User tries to register on cyclos, Examples (#2)",PASS,""
+"","","",""
+BROWSER: chrome,"","",""
+"","","",""
+User should be able to login with correct credentials and for wrong credentails user should get error message,"User tries to login With valid credentials and Logout, Examples (#1)",PASS,""
+User should be able to login with correct credentials and for wrong credentails user should get error message,"User tries to login With valid credentials and Logout, Examples (#2)",FAIL,'Are you sure you wish to logout?' is not present on the page
+User should be able to login with correct credentials and for wrong credentails user should get error message,"User tries to login With wrong credentials and Logout, Examples (#1)",PASS,""
+User should be able to login with correct credentials and for wrong credentails user should get error message,"User tries to login With wrong credentials and Logout, Examples (#2)",FAIL,'Wrong Credentials. Please try again!' is not present on the page
+Member Registration,"User tries to register on cyclos, Examples (#1)",FAIL,Registration is Successfull is not present on the page
+Member Registration,"User tries to register on cyclos, Examples (#2)",PASS,""

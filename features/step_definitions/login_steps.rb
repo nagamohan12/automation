@@ -1,58 +1,41 @@
-require 'watir'
-require 'selenium-cucumber'
-# require 'Login'
+login_Valid_Data = $login["Login With Valid Credentials and Logout"]
+login_invalid_Data = $login["Login With Invalid Credentials"]
 
-Given(/^it navigates to gmail\.com$/) do
-  navigate_to("http://www.gmail.com")
+Given(/^I open Cyclos website$/) {
+  open_page $base_url
+}
+
+When(/^Login with username and password$/) {
+  login login_Valid_Data["user_id"], login_Valid_Data["password"]
+  check_text login_Valid_Data["user_id"]
+}
+
+Then(/^I verify that I successfully logged in and logging out with alert "([^"]*)"$/) do |arg|
+  logout
+  alert_accept arg
+  successful_logout
 end
 
-# When(/^user logs with Username as "([^"]*)"$/) do |arg1|
-#   enter_text('name', arg1, 'Email')
-#   click('name', 'signIn')
-# end
+When(/^Login with incorrect user credentials$/) {
+  login login_invalid_Data["user_id"], login_invalid_Data["password"]
+}
 
-# When(/^Password "([^"]*)"$/) do |arg1|
-#   enter_text('name', arg1, 'Passwd')
-#   submit('name', 'signIn')
-#   wait(10)
-# end
-
-When(/^user logs in using valid user name$/) do
-  # binding.pry
-  @user = Record.get_file_data('test').first
-  enter_text('name', @user['email'].gsub(/\s+/, ""), 'Email')
-  click('name', 'signIn')
+Then(/^I should get message not found with "([^"]*)"$/) do |arg|
+  login_message arg
 end
 
-And(/^Valid password$/) do
-  wait(3)
-  enter_text('name', @user['password'].gsub(/\s+/, ""), 'Passwd')
-  submit('name', 'signIn')
-  wait(10)
+Then(/^I should get success with "([^"]*)"$/) do |arg|
+  login_message arg
 end
 
-Then(/^login should be successfull$/) do
-  Login.check_user_name
-  wait(10)
-  click("xpath", ".//*[@id='gb']/div[1]/div[1]/div/div[4]/div[1]/a")
-  click("xpath", "//a[text()='Sign out']")
-  wait(5)
-  close_driver()
+Then(/^After Login I verify that I successfully click on logout$/) do
+  logout
 end
 
-Then(/^login should be failed as 'Please enter your email\.'$/) do
-  Login.check_password_error_message
+Then(/^It should successfully logout$/) do
+  successful_logout
 end
 
-When(/^user logs in using Username as "([^"]*)"$/) do |arg1|
-  enter_text('name', arg1, 'Email')
-  click('name', 'signIn')
-end
-
-When(/^Password "([^"]*)"$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then(/^login should be failed$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+Then(/^I verify that alert message with "([^"]*)"$/) do |arg|
+  alert_accept arg
 end

@@ -2,11 +2,14 @@ require 'watir-webdriver'
 #Cucumber provides a number of hooks which allow us to run blocks at various points in the Cucumber test cycle
 Before do
   # binding.pry
-  # $workbook = RubyXL::Workbook.new
   # Do something before each scenario.
 end
 
 Before do |scenario|
+  $driver = Selenium::WebDriver.for(:"#{$browser_type}")
+  # $driver = Selenium::WebDriver.for(:chrome)
+  $driver.manage().window().maximize()
+  $wait = Selenium::WebDriver::Wait.new(:timeout => 10)
   # The +scenario+ argument is optional, but if you use it, you can get the title,
   # description, or name (title + description) of the scenario that is about to be
   # executed.
@@ -18,18 +21,16 @@ After do
 end
 
 After do |scenario|
-  if scenario.respond_to?('scenario_outline') then
-    scenario = scenario.scenario_outline
-  end
-  if scenario.failed?
-    Dir::mkdir('screenshots') unless File.directory?('screenshots')
-    screenshot = "./screenshots/FAILED_#{scenario.name.gsub(' ','_').gsub(/[^0-9A-Za-z_]/, '')}_#{Time.now}.png"
-    $driver.save_screenshot(screenshot)
-    embed screenshot, 'image/png'
-  end
-  # close_driver()
-  # $driver.cookies.clear
+  Screenshot.capture_screenshot(scenario) if scenario.failed?
+  set_scenarios_details(scenario)
+  $driver.close
+  sleep(1)
 end
+
+AfterStep do |step|
+  # binding.pry
+end
+
 
 #Tagged hooks
 
@@ -41,4 +42,11 @@ end
 AfterStep('@Ex_tag1, @Ex_tag2') do
   # This will only run after steps within scenarios tagged
   # with @cucumis AND @sativus.
+end
+
+at_exit do
+  if $report_name.nil?
+    close_table
+  end
+  # summary_report(2,1,1)
 end
