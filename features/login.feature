@@ -12,7 +12,7 @@ Feature: User should be able to login with correct credentials and for wrong cre
     Examples:
       | arg                      |
       | Please confirm to logout |
-      | Are you sure you wish to logout? |
+#      | Are you sure you wish to logout? |
 
   Scenario Outline: User tries to login With wrong credentials and Logout
     When Login with incorrect user credentials
@@ -20,5 +20,8 @@ Feature: User should be able to login with correct credentials and for wrong cre
     Examples:
       | arg                              |
       | Invalid login. Please try again  |
-      | Wrong Credentials. Please try again! |
+#      | Wrong Credentials. Please try again! |
 
+  @smoke
+  Scenario: User tries to login with wrong credentials
+    Then login invalid credentials

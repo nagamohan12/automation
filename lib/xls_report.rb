@@ -8,7 +8,7 @@ module XlsReport
     create_header
   end
   def create_header
-    header = ["Feature", "Scenario", "Result", "Remarks"]
+    header = ["Feature", "Scenario", "Result", "Remarks","start","end","Duration"]
     insert_output_excel_row(header)
   end
   def insert_output_excel_row(row)

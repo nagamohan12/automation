@@ -7,8 +7,9 @@ module ReportDetails
     create_report
     $report_name = $full_file_name
     create_new_xls
-    insert_head_title($application_name)
-    insert_reportname_date($application_name,$result_date)
+    application_name =XlsAct.get_application_name
+    insert_head_title(application_name)
+    insert_reportname_date(application_name,$result_date)
   end
 
   def set_initial_report_with_cucumber
@@ -24,7 +25,7 @@ module ReportDetails
     $features_list << scenario[:feature]
   end
 
-  def set_scenarios_details(scenario)
+  def set_scenarios_details(scenario,screenshot)
     # Cucumber::Core::Ast
     scenario_name = scenario.name
     feature_name = scenario.feature.name
@@ -34,8 +35,8 @@ module ReportDetails
       feature_data(feature_name) unless $features.include? feature_name
       $features << feature_name
     end
-    scenario_data(scenario_name,status,remarks)
-    insert_output_excel_row([feature_name,scenario_name,status,remarks])
+    scenario_data(scenario_name,status,remarks,screenshot[:screenshot_path],screenshot[:start_time],screenshot[:end_time],screenshot[:duration])
+    insert_output_excel_row([feature_name,scenario_name,status,remarks,screenshot[:start_time],screenshot[:end_time],screenshot[:duration]])
   end
 
   def set_browser_to_xls_table_to_html

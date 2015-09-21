@@ -6,8 +6,26 @@ Before do
 end
 
 Before do |scenario|
-  $driver = Selenium::WebDriver.for(:"#{$browser_type}")
-  # $driver = Selenium::WebDriver.for(:chrome)
+  # $driver = SeleniumTest.new()
+  # $driver.setup
+  # SeleniumTest.new()
+  # $seleniums.each do |driver|
+  #   driver.manage().window().maximize()
+  # end
+  # if environment == :int
+  #   $driver = Watir::Browser.new(:remote, :url=>"http://localhost:4444/wd/hub", :desired_capabilities=> ['ff','chrome'])
+  #   #Optional: in the case of setting your default start page @browser.goto "http://[your start page of your test site]:8080"
+  # elsif environment == :local
+  #   $driver = Watir::Browser.new ff
+  #   # $driver.goto "http://[some other environment]:8080"
+  # end
+  # Selenium::SeleniumDriver.new("localhost", 4444, browser, "http://192.168.16.169:8080", 10000)
+  $start_scenario_time = Time.now
+  # $driver = Selenium::WebDriver.for(:"#{$browser_type}")
+  # $driver = Selenium::WebDriver::Chrome::Service.executable_path = '/usr/local/bin/chromedriver' # specify the path of chromedriver
+  # binding.pry
+  # Selenium::WebDriver::Chrome::Service.executable_path = '/usr/local/bin/chromedriver'
+  $driver = Selenium::WebDriver.for(:chrome)
   $driver.manage().window().maximize()
   $wait = Selenium::WebDriver::Wait.new(:timeout => 10)
   # The +scenario+ argument is optional, but if you use it, you can get the title,
@@ -21,8 +39,12 @@ After do
 end
 
 After do |scenario|
-  Screenshot.capture_screenshot(scenario) if scenario.failed?
-  set_scenarios_details(scenario)
+  screenshot_path = scenario.failed? ? Screenshot.capture_screenshot(scenario) : nil
+  $end_scenario_time = Time.now
+  diff = time_difference($start_scenario_time,$end_scenario_time)
+  time_diff = convert_sec_to_hour(diff)
+  other_data = {screenshot_path: screenshot_path, start_time: $start_scenario_time, end_time: $end_scenario_time, duration: time_diff}
+  set_scenarios_details(scenario,other_data)
   $driver.close
   sleep(1)
 end
@@ -46,7 +68,13 @@ end
 
 at_exit do
   if $report_name.nil?
-    close_table
+    # if ParallelTests.first_process?
+    #   ParallelTests.wait_for_other_processes_to_finish
+      close_table
+      execution_ends(Time.now)
+    # end
+    # close_table
+    # execution_ends(Time.now)
   end
   # summary_report(2,1,1)
 end

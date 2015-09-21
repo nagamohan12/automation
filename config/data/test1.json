@@ -1,0 +1,66 @@
+{
+  "Login With Valid Credentials and Logout": {
+    "user_id": "NousBDDDemo",
+    "password": "test123"
+  },
+  "Login With Invalid Credentials": {
+    "user_id": "IncorrectUsername",
+    "password": "Incorrectpassword"
+  },
+  "Register user": {
+    "login_name": "NousBdddemoP",
+    "full_name": "NousBDDDemo Project",
+    "email_id": "nousautomatioan@test.com",
+    "birthday": "19/08/1988",
+    "address_details": "Nous Info Systems HSR Layout Bangalore",
+    "postal_code": "560 102",
+    "city_name": "Bangalore",
+    "phone_number": "+91 80 41939401",
+    "mobile_phone_number": "+91 99 00123450",
+    "fax_number": "+91 80 25539145",
+    "url_link": "http://nousinfosystems.com",
+    "password": "PassWord!12",
+    "confirm_password": "PassWord!12"
+  },
+  "transfer_amount": {
+    "sender": "UserReceiver",
+    "sender_password": "nous;123",
+    "receiver": "NousBDDDemo",
+    "receiver_password": "test123",
+    "amount": 0.01
+  },
+  "User tries to login with wrong credentials": {
+    "user_id": [
+      "",
+      "",
+      "UserReceiver",
+      "ABC",
+      "NousBDDDemo"
+    ],
+    "password": [
+      "",
+      "test123",
+      "",
+      "CDE",
+      "test123"
+    ]
+  }
+  "Transfer amount from one account to another": [
+    {
+      "user_id" : "",
+      "password": ""
+    },
+    {
+      "user_id" : "",
+      "password": "test123"
+    },
+    {
+      "user_id" : "NousBDDDemo",
+      "password": ""
+    },
+    {
+      "user_id" : "NousBDDDemo",
+      "password": "test123"
+    }
+  ]
+}

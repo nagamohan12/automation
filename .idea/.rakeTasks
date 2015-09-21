@@ -4,4 +4,4 @@ You are allowed to:
 1. Remove rake task
 2. Add existing rake tasks
 To add existing rake tasks automatically delete this file and reload the project.
---><RakeGroup description="" fullCmd="" taksId="rake"><RakeTask description="Run Cucumber features" fullCmd="features" taksId="features" /><RakeTask description="Run Cucumber features" fullCmd="selected_features" taksId="selected_features" /><RakeTask description="" fullCmd="default" taksId="default" /><RakeTask description="" fullCmd="list" taksId="list" /><RakeTask description="" fullCmd="selected_scenario" taksId="selected_scenario" /></RakeGroup></Settings>
+--><RakeGroup description="" fullCmd="" taksId="rake"><RakeTask description="" fullCmd="default" taksId="default" /><RakeTask description="" fullCmd="list" taksId="list" /><RakeTask description="" fullCmd="selected_scenario" taksId="selected_scenario" /></RakeGroup></Settings>

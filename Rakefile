@@ -28,7 +28,7 @@ task :selected_scenario => [] do
   browsers = XlsAct.get_appllication_config
   set_initial_report_with_rake
   $browser_count = 0
-      .each do |browser|
+  browsers.each do |browser|
     $browser = XlsAct.get_browser
     scenarios = XlsAct.get_scenario_list
     set_browser_to_xls_table_to_html
@@ -40,6 +40,7 @@ task :selected_scenario => [] do
     close_table
     $browser_count += 1
   end
+  execution_ends(Time.now)
 end
 
 task :list, [:level] => [] do |t, args|

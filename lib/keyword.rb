@@ -17,35 +17,36 @@ module Keyword
       @login.password_element.send_keys password
       @login.loginbtn_element.click
     rescue
-      ArgumentError.new("Failure to login")
+      raise ArgumentError.new("Failure to login")
     end
   end
 
   def logout
     begin
+      sleep(1)
       @login.logoutbtn_element.click
     rescue
-      ArgumentError.new("logout button failed to click")
+      raise ArgumentError.new("logout button failed to click")
     end
   end
 
   def check_text(username)
     begin
       $wait.until {@login.loggedinuser.include?(username)}
-    rescue
-      ArgumentError.new("'#{username}' is not present on the page")
+    rescue StandardError => e
+      raise ArgumentError.new("'#{username}' is not present on the page")
     end
   end
 
   def alert_accept(confirm_message)
-    sleep(2)
+    sleep(1)
     begin
       alert = $wait.until {$driver.switch_to.alert}
       $wait.until {alert.text.include? (confirm_message)}
       # alert.check_text(confirm_message)
       alert.accept
     rescue
-      alert.dismiss
+      alert.dismiss if alert
       raise ArgumentError.new("'#{confirm_message}' is not present on the page")
     end
   end
@@ -139,5 +140,75 @@ module Keyword
     # def captcha_decode
     #   @register.captcha_element
     # end
+
+  def payment
+    sleep(1)
+    begin
+      @login.payment_element.click
+    rescue
+      raise ArgumentError.new("payment button failed to click")
+    end
+  end
+
+  def username_to_send_amount(user,amount)
+    begin
+      $wait.until {@login.member_user_id}
+      @login.member_user_id.clear
+      @login.member_user_id_element.send_keys user
+      sleep(1)
+      @login.amount_element.send_keys amount
+      $account_description = Time.now
+      @login.description_element.send_keys $account_description
+      @login.amount_submit_element.click
+      sleep(1)
+      @login.submit
+    rescue
+      raise ArgumentError.new('payment not success')
+    end
+  end
+
+  def open_account_information
+    begin
+      sleep(1)
+      @login.account_btn_element.click
+      sleep(1)
+      @login.account_information_btn_element.click
+    rescue
+      raise ArgumentError.new('Payment information not opened properly')
+    end
+  end
+
+  def check_account_transffered
+    begin
+      description = $wait.until {$driver.find_element(:xpath, "//*[contains(text(),'#{$account_description}')]")}
+      description.text.equal? $account_description
+    rescue
+      raise ArgumentError.new('Payment not transffered')
+    end
+  end
+
+  def check_login_scenario_is_valid
+    invalid = ["Login name is required","Password is required","Invalid login. Please try again"]
+    sleep(1)
+    begin
+      alert = $driver.switch_to.alert
+    rescue
+      alert = nil
+    end
+    if alert
+      result = false
+      invalid.each do |message|
+        if alert.text.include? message
+          result = true
+        end
+        next
+      end
+    else
+      logout
+      alert_accept 'Please confirm to logout'
+      successful_logout
+    end
+    alert.dismiss if alert
+  end
 
 end

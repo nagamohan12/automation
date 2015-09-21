@@ -39,3 +39,10 @@ end
 Then(/^I verify that alert message with "([^"]*)"$/) do |arg|
   alert_accept arg
 end
+
+Then(/^login invalid credentials$/) do
+  $login["User tries to login with wrong credentials"].each do |d|
+    login d["user_id"], d["password"]
+    check_login_scenario_is_valid
+  end
+end

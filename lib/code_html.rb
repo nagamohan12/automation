@@ -29,9 +29,11 @@ module CodeHtml
     post_data(browser_name,'','')
   end
 
-  def scenario_data(name,result,remarks)
+  def scenario_data(name,result,remarks,screenshot,start_time,end_time,duration)
     open_report_file
-    post_data(name,result,remarks)
+    start_scenario_time = convert_standard_date_time_format(start_time)
+    end_scenario_time = convert_standard_date_time_format(end_time)
+    post_data(name,result,remarks,screenshot,start_scenario_time,end_scenario_time,duration)
   end
 
   def feature_data(name)
@@ -40,10 +42,11 @@ module CodeHtml
     post_data(feature_name,'','')
   end
 
-  def post_data(name,result,remarks)
+  def post_data(name,result,remarks,screenshot=nil,start_time=nil,end_time=nil,duration=nil)
     color = ""
     color = "bgcolor='green'" if result.downcase == 'pass'
     color = "bgcolor='red'" if result.downcase == 'fail'
+    screenshot_link = "screenshot" unless screenshot.nil?
     if name.include? 'Feature'
       $report.puts "<tr></tr>"
     end
@@ -51,6 +54,10 @@ module CodeHtml
                     <td>#{name}</td>
                     <td #{color}>#{result}</td>
                     <td>#{remarks}</td>
+                    <td><a href=#{screenshot} target='_blank'>#{screenshot_link}</a></td>
+                    <td>#{start_time}</td>
+                    <td>#{end_time}</td>
+                    <td>#{duration}</td>
                   </tr>"
     $report.close
   end
@@ -61,7 +68,11 @@ module CodeHtml
                     <tr>
                       <th>Description</th>
                       <th>Result</th>
-                      <th width='50%'>Remarks</th>
+                      <th width='40%'>Remarks</th>
+                      <th width='10%'>Screenshot</th>
+                      <th>Start</th>
+                      <th>End</th>
+                      <th>Duration</th>
                     </tr>"
     $report.close
     browser_data
@@ -73,7 +84,7 @@ module CodeHtml
   <center> <b><u>#{name} </u></b></center>
   </p>
   <p align='right' size=12>
-  <b>Date: #{date} </b>
+  <b>Execution Starts: #{date} </b>
   </p>"
     $report.close
   end
@@ -119,6 +130,14 @@ module CodeHtml
   <p> <b>Failed : #{$report_fail} </b></p>
   </body>
   </html>"
+    $report.close
+  end
+  def execution_ends(time)
+    open_report_file
+    end_date = time.strftime("%a, %e-%b-%Y %H:%M:%S")
+    $report.puts "<p align='right' size=12>
+  <b>Execution Ends: #{end_date} </b>
+  </p>"
     $report.close
   end
 end

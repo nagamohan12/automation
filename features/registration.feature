@@ -9,6 +9,6 @@ Feature: Member Registration
 #    Then I verify that I successfully registered by logging into the application
     Examples:
       | arg                                               |
-      | Registration is Successfull |
+#      | Registration is Successfull |
       | You have not typed the image characters correctly |
 
