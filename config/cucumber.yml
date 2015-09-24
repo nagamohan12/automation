@@ -1,7 +1,11 @@
 # config/cucumber.yml
 ##YAML Template
 ---
-<% time = "features_report#{Time.now.strftime('%d%m%y%H%M%S')}.html" %>
-html_report: --format progress --format html --out=<%= time %>
-all: features/ --format progress --format html --out=<%= time %>
+#<% time = "features_report#{Time.now.strftime('%d%m%y%H%M%S')}.html" %>
+<% time = "#{Time.now.strftime('%d%m%y%H%M%S')}" %>
+#html_report: --format progress --format html --out=<%= time %>
+#all: features/ --format progress --format html --out=<%= time %>
 #bvt: --tags @bvt
+#default: --format html --out report<%= ENV['TEST_ENV_NUMBER'] %>.html
+parallel: --format html --out /home/administrator/RubymineProjects/test_automation_cyclos/Results/report<%= ENV['TEST_ENV_NUMBER'] %>.html
+default: -f pretty -f json -o /home/administrator/RubymineProjects/test_automation_cyclos/json_reports/results<%=time%>.json -f html -o /home/administrator/RubymineProjects/test_automation_cyclos/json_reports/results<%=time%>.html

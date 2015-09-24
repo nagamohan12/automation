@@ -22,7 +22,12 @@ include Common
 SeedData.new()
 $browser_type = ENV['BROWSER'] || $browser || 'ff'
 $report_name = ENV['REPORT']
+$custom_report = ENV['CUSTOM_REPORT'] || true
 $features = []
+
+if $custom_report == 'true'
+  $custom_report = true
+end
 
 # if ENV['HEADLESS'] == 'true'
 #   require 'headless'
@@ -36,7 +41,9 @@ $features = []
 # end
 
 begin
-  set_initial_report_with_cucumber if $report_name.nil?
+  if $custom_report == true
+    set_initial_report_with_cucumber if $report_name.nil?
+  end
 rescue Exception => e
   puts e.message
   Process.exit(0)

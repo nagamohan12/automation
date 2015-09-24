@@ -1,4 +1,4 @@
-transfer_data = $login["transfer_amount"]
+transfer_data = $yaml_test_data["transfer_amount"]
 Given(/^An account holder is on payment form$/) do
   open_page $base_url
   login transfer_data["sender"], transfer_data["sender_password"]

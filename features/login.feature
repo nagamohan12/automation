@@ -20,7 +20,7 @@ Feature: User should be able to login with correct credentials and for wrong cre
     Examples:
       | arg                              |
       | Invalid login. Please try again  |
-#      | Wrong Credentials. Please try again! |
+      | Wrong Credentials. Please try again! |
 
   @smoke
   Scenario: User tries to login with wrong credentials

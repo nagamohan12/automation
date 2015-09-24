@@ -11,22 +11,4 @@ module Common
   def convert_standard_date_time_format(datetime)
     datetime.strftime("%d%b %H:%M:%S")
   end
-
-  def selenium(method)
-    $seleniums.each do |driver|
-      binding.pry
-      if method.nil?
-        driver
-      else
-        driver.send(method)
-      end
-    end
-  end
-
-  def selenium_url(url)
-    $seleniums.each do |driver|
-      $driver = driver
-      navigate_to(url)
-    end
-  end
 end

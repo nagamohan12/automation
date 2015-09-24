@@ -1,5 +1,5 @@
-login_Valid_Data = $login["Login With Valid Credentials and Logout"]
-login_invalid_Data = $login["Login With Invalid Credentials"]
+login_Valid_Data = $yaml_test_data["Login With Valid Credentials and Logout"]
+login_invalid_Data = $yaml_test_data["Login With Invalid Credentials"]
 
 Given(/^I open Cyclos website$/) {
   open_page $base_url
@@ -41,7 +41,8 @@ Then(/^I verify that alert message with "([^"]*)"$/) do |arg|
 end
 
 Then(/^login invalid credentials$/) do
-  $login["User tries to login with wrong credentials"].each do |d|
+  # $yaml_test_data["User tries to login with wrong credentials"].each do |d|
+  $json_data_driven.each do |d|
     login d["user_id"], d["password"]
     check_login_scenario_is_valid
   end

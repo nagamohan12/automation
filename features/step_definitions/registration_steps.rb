@@ -2,7 +2,7 @@ require 'selenium-cucumber'
 require 'watir'
 
 # include Keyword
-registration_data = $login["Register user"]
+registration_data = $yaml_test_data["Register user"]
 
 Given(/^I open Cyclos member registration form$/) {
   open_page $base_url
