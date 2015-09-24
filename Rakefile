@@ -14,6 +14,12 @@ include ReportDetails
 $custom_report = ENV['CUSTOM_REPORT'] || false
 task default: %w[features]
 
+if $custom_report == 'true'
+  $custom_report = true
+else
+  $custom_report = false
+end
+
 # Cucumber::Rake::Task.new(:features) do |t|
 #   t.cucumber_opts = "--format html --out=features_report.html --format pretty" # Any valid command line option can go here.
 #   t

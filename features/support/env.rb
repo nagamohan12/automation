@@ -22,11 +22,13 @@ include Common
 SeedData.new()
 $browser_type = ENV['BROWSER'] || $browser || 'ff'
 $report_name = ENV['REPORT']
-$custom_report = ENV['CUSTOM_REPORT'] || true
+$custom_report = ENV['CUSTOM_REPORT'] || false
 $features = []
 
 if $custom_report == 'true'
   $custom_report = true
+else
+  $custom_report = false
 end
 
 # if ENV['HEADLESS'] == 'true'
